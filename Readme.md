@@ -1,6 +1,7 @@
 
 ![title](title.jpg)
-Rumble Jungle - Card Adventure
+
+##Rumble Jungle - Card Adventure
 
 
 ## Description
@@ -22,21 +23,18 @@ In the user interface, the story will be watched card by card in a grid. Every c
 ![wireF_2](wireF_2.jpg)
 
 ### Spash Screen
-## un-ordered list
 * Opening shot
 * Start button
 * link or whatever credits
 
-### Spash Screen
-## un-ordered list
+### Game Screen
 * Title
 * Adventure Grid
 * Cards Stack List
 * Active Card Slot section [4]
 * HP monitor with portrait of the explorer
 
-### Game Over
-## un-ordered list
+### Game Over Screen
 * Game Over Text
 * Picture of death snapshot (skull)
 
