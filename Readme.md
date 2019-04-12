@@ -1,7 +1,4 @@
-
-
-```
-#Rumble Jungle - Card Adventure
+# Rumble Jungle - Card Adventure
 
 ![2019-04-12 15.19.20](/Users/miguelangelalvarez/Dropbox/Cargas de cámara/2019-04-12 15.19.20.jpg)
 
