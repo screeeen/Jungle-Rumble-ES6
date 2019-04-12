@@ -1,5 +1,5 @@
 
-![title](title.jpg)
+![title](title.png)
 
 Rumble Jungle - Card Adventure
 
