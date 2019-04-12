@@ -1,6 +1,7 @@
-# Rumble Jungle - Card Adventure
 
 ![title](title.jpg)
+Rumble Jungle - Card Adventure
+
 
 ## Description
 Rumble Jungle is a digital adventure where the a explorer makes their way thought the jungle.
@@ -17,7 +18,9 @@ The player looses when their HP is 0 or they get suddenly killed by a perill.
 In the user interface, the story will be watched card by card in a grid. Every cell is a small interactive movie.
 
 ## User Interface
-![2019-04-12 14.47.08](/Users/miguelangelalvarez/Dropbox/Cargas de cámara/2019-04-12 14.47.08.jpg)
+![wireF_1](wireF_1.jpg)
+![wireF_2](wireF_2.jpg)
+
 ### Spash Screen
 ## un-ordered list
 * Opening shot
@@ -37,8 +40,6 @@ In the user interface, the story will be watched card by card in a grid. Every c
 * Game Over Text
 * Picture of death snapshot (skull)
 
-![wireF_1](wireF_1.jpg)
-![wireF_2](wireF_2.jpg)
 
 ## MVP (DOM)
 The mvp is a game where the player can select 3 card types and die or finish the quest. The quest view, Avatar UI, card stack and card slots are updated every game step. Basic animations on quest view are triggered.
