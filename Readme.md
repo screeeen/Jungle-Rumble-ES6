@@ -1,7 +1,7 @@
 
 ![title](title.jpg)
 
-##Rumble Jungle - Card Adventure
+Rumble Jungle - Card Adventure
 
 
 ## Description
