@@ -66,80 +66,118 @@ The mvp is a game where the player can select 3 card types and die or finish the
 - Sfx + Animations tribe playing congas
 
 
-## Data structure
-### game.js
-​```
-Game(){
+##### main.js
+
+```
+main(){
+new player();
+new cards();
+new game();
+
+buildDome();
+buildSplashScren();
+buildGameScreen();
+buildGameOverScreen();
+updateStackView(cardsStack);
+updateHandSlotView(hand);
+updateMonitorView(card.type);
+updateAvatarView(hp);
+}
+
+window.addEventListener('load', main);
+
+
+```
+
+##### Game.js
+
+`Game(player,cardStack){
+
+this.player = player;
+
+this.cardStack = cardStack;
+
+this.hand = [];
+
+this.disposal =[];
 
 }
 
-Game.prototype.startGame(){
+Game.prototype.shuffle(cardStack){
+
+return shuffledCards
 
 }
 
-Game.prototype.updateAll(){
+Game.prototype.giveHand(cardStack){
+
+return hand
+
 }
 
-Game.prototype.clearAll(){
+Game.prototype.pickCardFromSlot(event){
+
+checkCard();
+
 }
 
-Game.prototype.renderAll(){
+Game.prototype.checkCard(card){
+
+checkStatus();
+
+displayStatus();
+
 }
 
-Game.prototype.finishGameCallback(){
-}
-​```
+Game.prototype.fight(){
 
-### character.js
-​```
-Character(){
-  this.x;
-  this.y;
-  this.size;
-  this.canvas;
-  this.ctx;
 }
 
-Character.prototype.update(){
+Game.prototype.hole(){
+
 }
 
-Character.prototype.render(){
+Game.prototype.life(){
+
 }
 
-Character.prototype.move(){
+Game.prototype.checkStatus(){
+
 }
 
-Character.prototype.checkCollisionWithBlock(block){
+Game.prototype.flush(){
+
 }
 
-Character.prototype.death(){
+##### data.js
+
+Cardstack =[…cards];
+
+
+
+##### player.js
+
+Player (){
+
+this.hp = 10;
+
 }
 
-Character.prototype.win(){
+##### hand.js 
+
+Hand(){
+
+this.hand = [4]
+
 }
 
-Character.prototype.gravity(){
+##### card.js
+
+Card(type){
+
+this.type = type;
+
 }
-
-Character.prototype.jump(){
-}
-
-
-​```
-
-### block.js
-​```
-Block(){
-  this.x;
-  this.y;
-  this.size;
-  this.canvas;
-  this.ctx;
-}
-
-Block.prototype.render(){
-}
-​```
 
 
 ## States y States Transitions
