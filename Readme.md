@@ -68,7 +68,6 @@ The mvp is a game where the player can select 3 card types and die or finish the
 `
 ##### main.js
 
-
 main(){
 new player();
 new cards();
@@ -179,8 +178,6 @@ this.type = type;
 }
 
 
-`
-
 
 ## States y States Transitions
 
@@ -201,7 +198,7 @@ this.type = type;
   - destroyGame()
   - buildGameOver()
   - addEventListener( if splashScreen, else startGame) 
-​```
+
 
 ## Task
 - Main - buildDom
