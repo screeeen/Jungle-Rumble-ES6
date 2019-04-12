@@ -1,6 +1,6 @@
 # Rumble Jungle - Card Adventure
 
-![2019-04-12 15.19.20](2019-04-12 15.19.20.jpg)
+![title](title.jpg)
 
 ## Description
 Rumble Jungle is a digital adventure where the a explorer makes their way thought the jungle.
