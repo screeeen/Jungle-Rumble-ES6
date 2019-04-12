@@ -85,11 +85,10 @@ updateAvatarView(hp);
 }
 
 window.addEventListener('load', main);
-`
-`
+
 ##### Game.js
 
-`Game(player,cardStack){
+Game(player,cardStack){
 
 this.player = player;
 
@@ -146,15 +145,12 @@ Game.prototype.checkStatus(){
 Game.prototype.flush(){
 
 }
-`
-`
+
 
 ##### data.js
 
 Cardstack =[…cards];
-`
 
-`
 ##### player.js
 
 Player (){
@@ -162,9 +158,7 @@ Player (){
 this.hp = 10;
 
 }
-`
 
-`
 
 ##### hand.js 
 
@@ -173,9 +167,8 @@ Hand(){
 this.hand = [4]
 
 }
-`
 
-`
+
 
 ##### card.js
 
@@ -184,8 +177,11 @@ Card(type){
 this.type = type;
 
 }
+
+
 `
-`
+
+
 ## States y States Transitions
 
 - buildGameScreen()
