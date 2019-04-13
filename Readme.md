@@ -67,140 +67,103 @@ The mvp is a game where the player can select 3 card types and die or finish the
 
 
 ## Data structure
-### game.js
-​```
-Game(){
+#####main.js
 
+```
+main(){
+new player();
+new cards();
+new game();
+
+buildDome();
+buildSplashScren();
+buildGameScreen();
+buildGameOverScreen();
+updateStackView(cardsStack);
+updateHandSlotView(hand);
+updateMonitorView(card.type);
+updateAvatarView(hp);
 }
 
-Game.prototype.startGame(){
+window.addEventListener('load', main);
 
+##### Game.js
+Game(player,cardStack){
+this.player = player;
+this.cardStack = cardStack;
+this.hand = [];
+this.disposal =[];
 }
 
-Game.prototype.updateAll(){
+Game.prototype.shuffle(cardStack){
+return shuffledCards
 }
 
-Game.prototype.clearAll(){
+Game.prototype.giveHand(cardStack){
+return hand
+}
+Game.prototype.pickCardFromSlot(event){
+checkCard();
 }
 
-Game.prototype.renderAll(){
+Game.prototype.checkCard(card){
+checkStatus();
+displayStatus();
 }
 
-Game.prototype.finishGameCallback(){
-}
-​```
-
-### character.js
-​```
-Character(){
-  this.x;
-  this.y;
-  this.size;
-  this.canvas;
-  this.ctx;
+Game.prototype.fight(){
 }
 
-Character.prototype.update(){
+Game.prototype.hole(){
 }
 
-Character.prototype.render(){
+Game.prototype.life(){
 }
 
-Character.prototype.move(){
+Game.prototype.checkStatus(){
 }
 
-Character.prototype.checkCollisionWithBlock(block){
+Game.prototype.flush(){
 }
 
-Character.prototype.death(){
+##### data.js
+Cardstack =[…cards];
+
+
+
+##### player.js
+Player (){
+this.hp = 10;
 }
 
-Character.prototype.win(){
+##### hand.js 
+Hand(){
+this.hand = [4]
 }
 
-Character.prototype.gravity(){
-}
-
-Character.prototype.jump(){
+##### card.js
+Card(type){
+this.type = type;
 }
 
 
-​```
+```
 
-### block.js
-​```
-Block(){
-  this.x;
-  this.y;
-  this.size;
-  this.canvas;
-  this.ctx;
-}
-
-Block.prototype.render(){
-}
-​```
 
 
 ## States y States Transitions
-​```
+```
 - splashScreen()
-  - destroyGameOver(if)
-  - buildSplash()
-  - addEventListener(startGame)
-  
-  
+	- buildDome();
+	- buildGameScreen();
+
 - starGame()
-  - destroySplash()
-  - destroyGameOver()
-  - create new Game()
-  - game.start()
-  
-  
-- gameOver()
-  - destroyGame()
-  - buildGameOver()
-  - addEventListener( if splashScreen, else startGame) 
-​```
+	-	new player();
+	- new cards();
+	- new game();
+	
+	- buildGameOverScreen()  
 
-## Task
-- Main - buildDom
-- Main - buildSplash
-- Main - addEventListener
-- Main - destroySplash
-- Main - 3 states transitions
-- Game - buildDom
-- Game - TimeOut test
-- Game - 3 states transitions
-- Main - GameWon
-- Main - destroy Game
-- Main - GameWon RESTART
-- Main - removeGameWon
-- Game - restartGame
-- Game - addEventListener
-- Block - create
-- Game - create player
-- Player - create
-- Player - move
-- Player - gravity
-- Player - collision
-- Player - jump
-- Game - check win
-
-## Links
-
-
-### Trello
-[Link url](https://trello.com)
-
-
-### Git
-URls for the project repo and deploy
-[Link Repo](https://github.com/Gabriel0liver/skull-jumper)
-[Link Deploy](https://Gabriel0liver.github.io/skull-jumper/)
-
-
-### Slides
-URls for the project presentation (slides)
-[Link Slides.com](http://slides.com)
+- gameOver() 
+	- buildSplashScren();
 ```
