@@ -65,7 +65,10 @@ The mvp is a game where the player can select 3 card types and die or finish the
 - Sfx life++
 - Sfx + Animations tribe playing congas
 
+`
+##### main.js
 
+<<<<<<< HEAD
 ## Data structure
 #####main.js
 
@@ -167,3 +170,178 @@ this.type = type;
 - gameOver() 
 	- buildSplashScren();
 ```
+=======
+main(){
+new player();
+new cards();
+new game();
+
+buildDome();
+buildSplashScren();
+buildGameScreen();
+buildGameOverScreen();
+updateStackView(cardsStack);
+updateHandSlotView(hand);
+updateMonitorView(card.type);
+updateAvatarView(hp);
+}
+
+window.addEventListener('load', main);
+
+##### Game.js
+
+Game(player,cardStack){
+
+this.player = player;
+
+this.cardStack = cardStack;
+
+this.hand = [];
+
+this.disposal =[];
+
+}
+
+Game.prototype.shuffle(cardStack){
+
+return shuffledCards
+
+}
+
+Game.prototype.giveHand(cardStack){
+
+return hand
+
+}
+
+Game.prototype.pickCardFromSlot(event){
+
+checkCard();
+
+}
+
+Game.prototype.checkCard(card){
+
+checkStatus();
+
+displayStatus();
+
+}
+
+Game.prototype.fight(){
+
+}
+
+Game.prototype.hole(){
+
+}
+
+Game.prototype.life(){
+
+}
+
+Game.prototype.checkStatus(){
+
+}
+
+Game.prototype.flush(){
+
+}
+
+
+##### data.js
+
+Cardstack =[…cards];
+
+##### player.js
+
+Player (){
+
+this.hp = 10;
+
+}
+
+
+##### hand.js 
+
+Hand(){
+
+this.hand = [4]
+
+}
+
+
+
+##### card.js
+
+Card(type){
+
+this.type = type;
+
+}
+
+
+
+## States y States Transitions
+
+- buildGameScreen()
+  - destroyGameOver(if)
+  - buildSplash()
+  - addEventListener(startGame)
+  
+  
+- starGame()
+  - destroySplash()
+  - destroyGameOver()
+  - create new Game()
+  - game.start()
+  
+  
+- gameOver()
+  - destroyGame()
+  - buildGameOver()
+  - addEventListener( if splashScreen, else startGame) 
+
+
+## Task
+- Main - buildDom
+- Main - buildSplash
+- Main - addEventListener
+- Main - destroySplash
+- Main - 3 states transitions
+- Game - buildDom
+- Game - TimeOut test
+- Game - 3 states transitions
+- Main - GameWon
+- Main - destroy Game
+- Main - GameWon RESTART
+- Main - removeGameWon
+- Game - restartGame
+- Game - addEventListener
+- Block - create
+- Game - create player
+- Player - create
+- Player - move
+- Player - gravity
+- Player - collision
+- Player - jump
+- Game - check win
+
+## Links
+
+
+### Trello
+[Link url](https://trello.com)
+
+
+### Git
+URls for the project repo and deploy
+[Link Repo](https://github.com/Gabriel0liver/skull-jumper)
+[Link Deploy](https://Gabriel0liver.github.io/skull-jumper/)
+
+
+### Slides
+URls for the project presentation (slides)
+[Link Slides.com](http://slides.com)
+```
+>>>>>>> 5417f942bc671c640c416807d07cf898ddd0bd92
