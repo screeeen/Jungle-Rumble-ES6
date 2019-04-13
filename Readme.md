@@ -201,43 +201,21 @@ this.type = type;
 
 
 ## Task
-- Main - buildDom
-- Main - buildSplash
-- Main - addEventListener
-- Main - destroySplash
-- Main - 3 states transitions
-- Game - buildDom
-- Game - TimeOut test
-- Game - 3 states transitions
-- Main - GameWon
-- Main - destroy Game
-- Main - GameWon RESTART
-- Main - removeGameWon
-- Game - restartGame
-- Game - addEventListener
-- Block - create
-- Game - create player
-- Player - create
-- Player - move
-- Player - gravity
-- Player - collision
-- Player - jump
-- Game - check win
+
 
 ## Links
 
 
 ### Trello
-[Link url](https://trello.com)
+
 
 
 ### Git
 URls for the project repo and deploy
-[Link Repo](https://github.com/Gabriel0liver/skull-jumper)
-[Link Deploy](https://Gabriel0liver.github.io/skull-jumper/)
+
 
 
 ### Slides
 URls for the project presentation (slides)
-[Link Slides.com](http://slides.com)
+
 ```
