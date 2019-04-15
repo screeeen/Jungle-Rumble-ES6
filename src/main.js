@@ -9,6 +9,8 @@ function main() {
   }
 
   function buildSplashScreen() {
+    // clearInterval(timerForGameOver);
+
     const splashScreen = buildDom(`
 <section>
   <h1>Jungle Rumble Cards Adventure</h1>
@@ -99,10 +101,8 @@ function main() {
     // Generate avatar
     function updateAvatarView() {
       let avatarView = document.querySelector("#avatar");
-      let result = `<h2 class="hp">LIFE: ${
-        game.player.hp
-      }</h2><img style="background: url(img/avatar.png) center no-repeat">
-    
+      let result = `<img style="background: url(img/avatar.png) center no-repeat">
+      <h2 class="hp">LIFE: ${game.player.hp}</h2>
      `;
       avatarView.innerHTML = result;
     }
@@ -114,7 +114,7 @@ function main() {
       let tipview = document.querySelector("#tip");
       let result = `<p id="tip-text1">${msg}</p> `;
       tipview.innerHTML = result;
-      
+
       // var i = 0;
       // var speed = 50;
       // if (msg) {
@@ -129,38 +129,44 @@ function main() {
     function createHandListeners(handCards) {
       handCards.forEach(function(card, index) {
         card.addEventListener("click", function() {
-          // let pickedCard = game.pickCard(index);
-          console.log(this);
           displayCard(index, this);
-
-          game.checkCard(game.hand[index]);
+          game.makeCardAction(game.hand[index]);
           updateAvatarView();
-          // game.discardCardAfterUse(game.hand[pickedCard]);
-          checkGameStatus();
-          game.checkHandStatus();
-          updateHandView();
-          updateStack();
+          checkIfGameOver();
+          game.discardCardAfterUse(game.hand[index]);
+
+          ///---------------
+          let areNewCardsNeeded = game.checkIfNewCardsAreNeeded();
+          if (areNewCardsNeeded) {
+            game.flush();
+            console.log(
+              "hey, Im in check. this is cardStack: " + this.cardStack
+            );
+            game.hand = game.getHand(game.cardStack);
+            updateHandView();
+            updateStack();
+          }
           nextTurn();
         });
       });
     }
 
-    function checkGameStatus() {
+    function checkIfGameOver() {
       if (game.player.hp < 1) {
         updateTipText("GAME OVER");
-        // resetGame();
-        // run();
+        var timerForGameOver = setInterval(buildGameOVerScreen, 500);
       }
     }
 
     document.addEventListener("keydown", function(event) {
       console.log(event.keyCode);
       if (event.keyCode === 38) {
- 
       }
     });
 
     function displayCard(index, element) {
+      element.isUsed = true;
+      game.usedCards[index] = "used";
       element.style.background = `url(img/${game.hand[index]}.png) no-repeat`;
     }
 
@@ -172,16 +178,26 @@ function main() {
     nextTurn();
 
     updateTipText("Welcome");
-    updateTipText("cardstack: " + typeof game.cardStack + " " + game.cardsStack);
+    updateTipText(
+      "cardstack: " + typeof game.cardStack + " " + game.cardsStack
+    );
     updateTipText("hand: " + game.hand);
     updateTipText("hp: " + game.player.hp);
   }
+
+  function buildGameOVerScreen() {
+    const gameOverScreen = buildDom(`
+    <section>
+    <h1>Game Over</h1>
+    <button class="restart-button">Restart</button>
+    </section>
+    `);
+
+    const restartButton = document.querySelector(".restart-button");
+    restartButton.addEventListener("click", buildSplashScreen);
+  }
 }
 window.addEventListener("load", main);
-
-
-
-
 
 // garbabe
 /*{ <div id="stack ul" data-card-name="${ele.name}">

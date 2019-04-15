@@ -4,7 +4,10 @@ function Game(player, cardStack) {
   this.player = player;
   this.cardStack = cardStack;
   this.hand = [];
+  this.usedCards = [];
+  this.usedCardsCounter = 0;
   this.disposal = [];
+  this.timerForGameOver = undefined;
   this.callback = null;
 }
 
@@ -28,30 +31,18 @@ Game.prototype.getHand = function(array) {
     let cardToPass = array.pop();
     hand.push(cardToPass);
   }
+  this.usedCardsCounter+=1;
   this.setTipCallback("game-hand: " + hand);
   return hand;
 };
 
-// Game.prototype.pickCard = function(slotNumber) {
-//   if (slotNumber >= this.hand.length) {
-//     console.log(
-//       "this card is not in your hand. choose less than: " + this.hand.length
-//     );
-//     return;
-//   }
-//   for (var i = 0; i < this.hand.length; i++) {
-//     if (i === slotNumber) {
-//       console.log("Your movement is: " + this.hand[slotNumber]);
-//       return slotNumber;
-//     }
-//   }
-// };
-
 Game.prototype.discardCardAfterUse = function(index) {
-  this.hand.splice(index, 1);
+  
+  this.usedCards = this.hand.splice(index, 1);
+  this.usedCardsCounter+=1;
 };
 
-Game.prototype.checkCard = function(card) {
+Game.prototype.makeCardAction = function(card) {
   switch (card) {
     case "fight":
       this.fight();
@@ -99,11 +90,13 @@ Game.prototype.flush = function() {
   );
 };
 
-Game.prototype.checkHandStatus = function() {
-  if (this.hand.length < 2) {
-    this.flush();
-    console.log("hey, Im in check. this is cardStack: " + this.cardStack);
-    this.hand = this.getHand(this.cardStack);
+Game.prototype.checkIfNewCardsAreNeeded = function() {
+  if (this.usedCardsCounter < 2) {
+    console.log("check t: " + this.hand.length);
+    return true;
+  } else {
+    console.log("check f: " + this.hand.length);
+    return false;
   }
 };
 
