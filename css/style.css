@@ -1,15 +1,13 @@
 html {
   background-color: #002fa7;
-
 }
 
-#game-frame {
+main {
   margin: 20px auto;
-  /* padding: 10px; */
+  padding: 10px;
   height: 88vh;
   width: 78vw;
   background-color: 002fa7;
-
 }
 
 h1 {
@@ -17,6 +15,14 @@ h1 {
   padding: 2.5% 0%;
   color: white;
   font-size: 1.5em;
+}
+
+h2 {
+  margin: 0% 0%;
+  padding: 1% 4%;
+  color: white;
+  font-size: 0.8em;
+  border-bottom: 1px solid white;
 }
 
 #title {
@@ -31,8 +37,9 @@ h1 {
   width: 100%;
   height: 90%;
   display: grid;
-  grid-template-columns: 3fr .5fr;
+  grid-template-columns: 3fr 0.5fr;
   grid-template-rows: 2fr 1fr 0.2fr;
+  /* grid-gap: 0px; */
 }
 
 #monitor {
@@ -48,8 +55,8 @@ h1 {
 
   margin: 0;
   padding: 0;
-    /* width: 100%; */
-    height: auto;
+  /* width: 100%; */
+  height: auto;
 
   background-repeat: no-repeat;
   background-size: 100%;
@@ -58,6 +65,8 @@ h1 {
 #stack {
   border: solid 1px white;
   background-color: #002fa7;
+  overflow: hidden;
+  /* position: absolute; */
 }
 .cards-list {
   display: block;
@@ -87,42 +96,74 @@ h1 {
   border: solid 1px black;
   grid-gap: 10px;
   background-color: #002fa7;
-
+  height: auto;
 }
 
-.hand-card {
+.hand-card { 
   border: solid 1px white;
   background-color: #002fa7;
   color: #fff;
   border-radius: 5px;
-  padding: 20px;
+  padding: 20px 20px 70px;
   width: 50%;
-  margin: 10px auto;
+  margin:  auto;
   background-repeat: no-repeat center;
   background-size: 1%;
+  
 }
 
-.card-back{
+.hand-card:hover {
+  border: solid 4px white;
+}
+
+.hand-card concealed {
+  border: solid 1px white;
+}
+
+.card-back {
   background-repeat: no-repeat center;
   background-size: 1%;
 }
 
 #avatar {
   border: solid 1px white;
-  background-color: #002fa7;
-  background-repeat: no-repeat center;
-  background-size: 100%;
 }
 
-.avatar-pic{
-  background-repeat: no-repeat center;
-  background-size: 50%;
-  width: auto;
+#avatar img {
+  /* background-repeat: no-repeat center; */
+  /* background-size: 5%; */
+  /* max-width:100%;
+  max-height:100%; */
   height: 100%;
-
+  width: 100%;
+  /* background-size: 40%; */
 }
 
-#cta {
+#tip {
   border: solid 1px white;
   color: white;
+  padding: 2px;
+}
+
+.start-button {
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+  color: #002fa7;
+font-size: 2em;
+  height: 60vh;
+  width: 100%;
+  /* text-decoration: none; */
+  box-shadow: 10px 10px 860px black;
+}
+.start-button:hover {
+  background-color: #002fa7;
+  color: white;
+  /* border: none; */
+  /* box-shadow: 10px 10px 860px; */
+
+}
+.start-button:active {
+  position: relative;
+  top: 1px;
 }
