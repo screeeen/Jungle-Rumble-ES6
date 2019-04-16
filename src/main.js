@@ -1,9 +1,8 @@
 "use strict";
 
 function main() {
-  const mainElement = document.querySelector("main");
-
   function buildDom(html) {
+    const mainElement = document.querySelector("main");
     mainElement.innerHTML = html;
     return mainElement;
   }
@@ -11,8 +10,6 @@ function main() {
   // -------------- GAME --------------------
 
   function buildSplashScreen() {
-    // clearInterval(timerForGameOver);
-
     const splashScreen = buildDom(`
 <section>
   <h1>Jungle Rumble Cards Adventure</h1>
@@ -56,10 +53,11 @@ function main() {
     const hp = 10;
     var player = new Player(hp);
 
-    const game = new Game(player, cardsStack,newRooms);
+    var cardStackForGame = JSON.parse(JSON.stringify(newCardsStack));
+    const game = new Game(player, cardStackForGame, newRooms);
     game.callback = updateTipText;
     game.cardStack = game.shuffleCards(game.cardStack);
-    game.hand = game.getHand(game.cardStack);
+    game.getHand(game.cardStack);
 
     function updateStack() {
       // Generate card divs and append them to the stack view
@@ -67,23 +65,28 @@ function main() {
       let result = "";
       game.cardStack.forEach(function(ele) {
         result += `
-      <li style="list-style-image: url(img/${ele}.png)">${ele}
+      <li style="list-style-image: url(img/${ele.value}.png)">${ele.value}
       </li>`;
       });
       stackView.innerHTML = result;
     }
 
     // Generate rooms and append them to the monitor view
-    function updateRoomsIntoMonitor() {
+    function updateRoomsIntoMonitor(card) {
       let monitorView = document.querySelector("#monitor");
       let result = "";
-      game.rooms.forEach(function(ele, index) {
-        if (index === 0){
+      game.rooms.forEach(function(ele, index, card) {
+        if (index === 0 || game.rooms[index].visited) {
           ele.value = "start";
-          game.rooms[0] = "start";
+          game.rooms[0].value = "start";
+          game.rooms[0].visited = true;
+        } else {
+          game.rooms[index].value = card;
         }
         result += `
-            <div class="room ${index}" style="background-image: url(img/${ele.value}_room_open.png)"></div>
+            <div class="room ${index}" style="background-image: url(img/${
+          ele.value
+        }_room_open.png)"></div>
 `;
       });
       monitorView.innerHTML = result;
@@ -95,9 +98,12 @@ function main() {
       let result = "";
       game.hand.forEach(function(ele, index) {
         result += `
-            <div class="hand-card" style="background: url(img/question.png) no-repeat"></div>`;
+            <div class="hand-card" index="${index}" style="background: url(img/question.png) no-repeat"></div>`;
       });
+
       handView.innerHTML = result;
+      game.handDivs = document.querySelectorAll(".hand-card");
+      console.log(game.handDivs);
     }
 
     // Generate avatar
@@ -116,47 +122,54 @@ function main() {
       tipview.innerHTML = result;
     }
 
-    function createHandListeners(handCards) {
-      handCards.forEach(function(card, index) {
-        card.addEventListener("click", function() {
-          displayCard(index, this);
+    function selectCard() {
+      console.log(this.attributes.index.value);
+      let index = this.attributes.index.value;
+      console.log(index);
+      this.removeEventListener('click',selectCard);
+      
 
-          game.makeCardAction(game.hand[index]);
-          updateAvatarView();
-          updateRoomsIntoMonitor();
-          checkIfGameOver();
-          game.discardCardAfterUse(game.hand[index]);
+      displayCard(index);
+      game.makeCardAction(game.hand[index].value);
+      updateAvatarView();
+      updateRoomsIntoMonitor(game.hand[index].value);
+      checkIfGameOver();
+      game.discardCardAfterUse(index);
+      console.log(game.hand);
 
-          if (game.checkIfCardsNeeded()) {
-            console.log(game.checkIfCardsNeeded());
-            setTimeout(displayCard(index, this), 1000);
 
-            game.flush();
-            game.hand = game.getHand(game.cardStack);
-            updateHandView();
-            updateStack();
+      if (game.checkIfCardsNeeded()) {
+        console.log("are needed?: " +game.checkIfCardsNeeded());
 
-            nextTurn();
-          }
-        });
-      });
+        game.getHand(game.cardStack);
+        updateHandView();
+        updateStack();
+
+        nextTurn();
+      }
+    }
+
+    function createHandListeners(handDiv) {
+      handDiv[0].addEventListener("click",selectCard);
+      handDiv[1].addEventListener("click", selectCard);
+      handDiv[2].addEventListener("click", selectCard);
+      handDiv[3].addEventListener("click", selectCard);
     }
 
     function nextTurn() {
-      let handCards = document.querySelectorAll(".hand-card");
-      createHandListeners(handCards);
+      // let handCards = document.querySelectorAll(".hand-card");
+      createHandListeners(game.handDivs);
     }
 
     function checkIfGameOver() {
       if (game.player.hp < 1) {
         updateTipText("GAME OVER");
-        game.timerForGameOver = setTimeout(buildGameOVerScreen, 1000);
+        setTimeout(buildGameOVerScreen, 1000);
       }
     }
 
-
-    function displayCard(index, element) {
-      element.style.background = `url(img/${game.hand[index]}.png) no-repeat`;
+    function displayCard(index) {
+      game.handDivs[index].style.background = `url(img/${game.hand[index].value}.png) no-repeat`;
     }
 
     //first state
@@ -187,13 +200,12 @@ function main() {
     restartButton.addEventListener("click", buildSplashScreen);
   }
 
-      //TOOL
-      document.addEventListener("keydown", function(event) {
-        console.log(event.keyCode);
-        if (event.keyCode === 38) {
-          buildGameScreen();
-        }
-      });
-
+  //TOOL
+  document.addEventListener("keydown", function(event) {
+    console.log(event.keyCode);
+    if (event.keyCode === 38) {
+      buildGameScreen();
+    }
+  });
 }
 window.addEventListener("load", main);

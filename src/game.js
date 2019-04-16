@@ -4,8 +4,9 @@ function Game(player, newCardsStack, newRooms) {
   this.player = player;
   this.cardStack = newCardsStack;
   this.hand = [];
+  this.handDivs = [];
   this.usedCards = [];
-  this.disposal = [];
+  this.selectedCard = 0;
   this.rooms = newRooms;
   this.callback = null;
 }
@@ -23,23 +24,27 @@ Game.prototype.shuffleCards = function(array) {
   return result;
 };
 
-Game.prototype.initializeRooms = function(){
-return this.cardStack.length;
-}
+Game.prototype.initializeRooms = function() {
+  return this.cardStack.length;
+};
 
 Game.prototype.getHand = function(array) {
-  let hand = [];
-  for (var i = 0; i < 4; i++) {
-    var randomCard = Math.random() * array.length;
-    let cardToPass = array.pop();
-    hand.push(cardToPass);
+  this.hand = [];
+  if (array.length > 0) {
+    for (var i = 0; i < 4; i++) {
+      var randomCard = Math.random() * array.length;
+      let cardToPass = array.pop();
+      this.hand.push(cardToPass);
+    }
   }
-  this.setTipCallback("game-hand: " + hand);
-  return hand;
+  console.log("flushed  New Hand:");
+  console.log(this.hand);
+
 };
 
 Game.prototype.discardCardAfterUse = function(index) {
-  this.usedCards = this.hand.splice(index, 1);
+  // this.usedCards = this.hand.splice(index, 1);
+  this.hand[index].isUsed = true;
 };
 
 Game.prototype.makeCardAction = function(card) {
@@ -72,7 +77,6 @@ Game.prototype.hole = function() {
   this.player.hp = 0;
   this.callback("You felt into the hole. You are dead.");
   console.log("--hole--");
-  
 };
 
 Game.prototype.life = function() {
@@ -81,20 +85,32 @@ Game.prototype.life = function() {
 };
 
 Game.prototype.checkIfCardsNeeded = function() {
-  console.log(" checkIfCardsNeeded - remaining cards: " + this.hand.length);
-  if (this.hand.length < 2) {
+  let counter = this.hand.length;
+  this.hand.forEach(function(card) {
+    // console.log("counter check: ");
+    // console.log(card.isUsed === true);
+    if (card.isUsed === true) {
+      counter--;
+      // console.log("counter: " + counter);
+    }
+  });
+  if (counter < 2) {
+    console.log(counter);
+    console.log("true- flush");
     return true;
   } else {
+    console.log(counter);
+    console.log("false");
     return false;
   }
 };
 
 Game.prototype.flush = function() {
-  this.disposal = this.hand.slice();
   this.hand = [];
-  this.callback(
-    "----------FLUSH------------ \n " + " Disposal Card: " + this.disposal
-  );
+  // this.callback(
+  //   "----------FLUSH------------ \n " + " Disposal Card: " + this.disposal
+  // );
+  console.log("flush");
 };
 
 Game.prototype.setTipCallback = function(updateTipText) {
