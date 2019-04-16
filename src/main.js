@@ -73,6 +73,7 @@ function main() {
 
     // Generate rooms and append them to the monitor view
     function updateRoomsIntoMonitor(card) {
+      console.log("monitor" + card);
       let monitorView = document.querySelector("#monitor");
       let result = "";
       game.rooms.forEach(function(ele, index, card) {
@@ -109,7 +110,19 @@ function main() {
     // Generate avatar
     function updateAvatarView() {
       let avatarView = document.querySelector("#avatar");
-      let result = `<img style="background: url(img/avatar.png) center no-repeat">
+      let n = "";
+      if (game.player.hp < 7){
+        n = "";
+      } else if (game.player.hp < 5){
+        n = "2";
+      } else if (game.player.hp < 3){
+        n = "3";
+      } else if (game.player.hp < 0) { 
+        n = "4";
+      }
+
+console.log("Pic " + n);
+      let result = `<img style="background: url(img/avatar_${n}.png) center no-repeat">
       <h2 class="hp">LIFE: ${game.player.hp}</h2>
      `;
       avatarView.innerHTML = result;
@@ -204,7 +217,7 @@ function main() {
       "cardstack: " + typeof game.cardStack + " " + game.cardsStack
     );
     tip("hand: " + game.hand);
-    tip("hp: " + game.player.hp);
+    tip("Welcome to jungle Rumble. Pick a card and enjoy. Your hp: " + game.player.hp);
   }
 
   // -------------- OVER --------------------
