@@ -34,7 +34,24 @@ var newCardsStack = [
   { value: "fight", isUsed: false },
   { value: "life", isUsed: false },
   { value: "life", isUsed: false },
-  { value: "life", isUsed: false },
-  { value: "hole", isUsed: false },
-  { value: "hole", isUsed: false }
+  { value: "life", isUsed: false }
 ];
+
+var newRooms = [
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false},
+  {value: "closed", visited: false}
+]

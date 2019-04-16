@@ -8,6 +8,8 @@ function main() {
     return mainElement;
   }
 
+  // -------------- GAME --------------------
+
   function buildSplashScreen() {
     // clearInterval(timerForGameOver);
 
@@ -18,11 +20,12 @@ function main() {
   </section>
 `);
     const startButton = document.querySelector(".start-button");
-    console.log("st bt " + startButton);
     startButton.addEventListener("click", buildGameScreen);
   }
 
   buildSplashScreen();
+
+  // -------------- GAME --------------------
 
   function buildGameScreen() {
     const gameScreen = buildDom(`
@@ -53,15 +56,10 @@ function main() {
     const hp = 10;
     var player = new Player(hp);
 
-    const game = new Game(player, cardsStack);
+    const game = new Game(player, cardsStack,newRooms);
     game.callback = updateTipText;
     game.cardStack = game.shuffleCards(game.cardStack);
     game.hand = game.getHand(game.cardStack);
-
-    function nextTurn() {
-      let handCards = document.querySelectorAll(".hand-card");
-      createHandListeners(handCards);
-    }
 
     function updateStack() {
       // Generate card divs and append them to the stack view
@@ -79,9 +77,13 @@ function main() {
     function updateRoomsIntoMonitor() {
       let monitorView = document.querySelector("#monitor");
       let result = "";
-      game.cardStack.forEach(function(ele) {
+      game.rooms.forEach(function(ele, index) {
+        if (index === 0){
+          ele.value = "start";
+          game.rooms[0] = "start";
+        }
         result += `
-            <div class="room" style="background-image: url(img/room_open.png)"></div>
+            <div class="room ${index}" style="background-image: url(img/${ele.value}_room_open.png)"></div>
 `;
       });
       monitorView.innerHTML = result;
@@ -109,64 +111,51 @@ function main() {
 
     // Generate avatar
     function updateTipText(msg) {
-      console.log(msg);
-
       let tipview = document.querySelector("#tip");
       let result = `<p id="tip-text1">${msg}</p> `;
       tipview.innerHTML = result;
-
-      // var i = 0;
-      // var speed = 50;
-      // if (msg) {
-      //   if (i < msg.length) {
-      //     result += result.charAt(i);
-      //     i++;
-      //     setTimeout(updateTipText, speed);
-      //   }
-      // }
     }
 
     function createHandListeners(handCards) {
       handCards.forEach(function(card, index) {
         card.addEventListener("click", function() {
           displayCard(index, this);
+
           game.makeCardAction(game.hand[index]);
           updateAvatarView();
+          updateRoomsIntoMonitor();
           checkIfGameOver();
           game.discardCardAfterUse(game.hand[index]);
 
-          ///---------------
-          let areNewCardsNeeded = game.checkIfNewCardsAreNeeded();
-          if (areNewCardsNeeded) {
+          if (game.checkIfCardsNeeded()) {
+            console.log(game.checkIfCardsNeeded());
+            setTimeout(displayCard(index, this), 1000);
+
             game.flush();
-            console.log(
-              "hey, Im in check. this is cardStack: " + this.cardStack
-            );
             game.hand = game.getHand(game.cardStack);
             updateHandView();
             updateStack();
+
+            nextTurn();
           }
-          nextTurn();
         });
       });
+    }
+
+    function nextTurn() {
+      let handCards = document.querySelectorAll(".hand-card");
+      createHandListeners(handCards);
     }
 
     function checkIfGameOver() {
       if (game.player.hp < 1) {
         updateTipText("GAME OVER");
-        var timerForGameOver = setInterval(buildGameOVerScreen, 500);
+        game.timerForGameOver = setTimeout(buildGameOVerScreen, 1000);
       }
     }
 
-    document.addEventListener("keydown", function(event) {
-      console.log(event.keyCode);
-      if (event.keyCode === 38) {
-      }
-    });
 
     function displayCard(index, element) {
-      element.isUsed = true;
-      game.usedCards[index] = "used";
       element.style.background = `url(img/${game.hand[index]}.png) no-repeat`;
     }
 
@@ -185,6 +174,8 @@ function main() {
     updateTipText("hp: " + game.player.hp);
   }
 
+  // -------------- OVER --------------------
+
   function buildGameOVerScreen() {
     const gameOverScreen = buildDom(`
     <section>
@@ -192,21 +183,17 @@ function main() {
     <button class="restart-button">Restart</button>
     </section>
     `);
-
     const restartButton = document.querySelector(".restart-button");
     restartButton.addEventListener("click", buildSplashScreen);
   }
+
+      //TOOL
+      document.addEventListener("keydown", function(event) {
+        console.log(event.keyCode);
+        if (event.keyCode === 38) {
+          buildGameScreen();
+        }
+      });
+
 }
 window.addEventListener("load", main);
-
-// garbabe
-/*{ <div id="stack ul" data-card-name="${ele.name}">
-<div class="card-type" name="${ele.img}"></div>
-<div class="icon" style="background: url(img/${ele.img}) no-repeat"> </div>
-</div> }*/
-
-//       <div class="room" style=background:url(/../../img/room.png)>
-//       <img src= url(/../../img/room.png)>
-//       </div>
-
-//<div class="card-back" style="background: url(img/question.png) no-repeat"><div>

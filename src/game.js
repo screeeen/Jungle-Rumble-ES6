@@ -1,13 +1,12 @@
 "use strict";
 
-function Game(player, cardStack) {
+function Game(player, newCardsStack, newRooms) {
   this.player = player;
-  this.cardStack = cardStack;
+  this.cardStack = newCardsStack;
   this.hand = [];
   this.usedCards = [];
-  this.usedCardsCounter = 0;
   this.disposal = [];
-  this.timerForGameOver = undefined;
+  this.rooms = newRooms;
   this.callback = null;
 }
 
@@ -24,6 +23,10 @@ Game.prototype.shuffleCards = function(array) {
   return result;
 };
 
+Game.prototype.initializeRooms = function(){
+return this.cardStack.length;
+}
+
 Game.prototype.getHand = function(array) {
   let hand = [];
   for (var i = 0; i < 4; i++) {
@@ -31,15 +34,12 @@ Game.prototype.getHand = function(array) {
     let cardToPass = array.pop();
     hand.push(cardToPass);
   }
-  this.usedCardsCounter+=1;
   this.setTipCallback("game-hand: " + hand);
   return hand;
 };
 
 Game.prototype.discardCardAfterUse = function(index) {
-  
   this.usedCards = this.hand.splice(index, 1);
-  this.usedCardsCounter+=1;
 };
 
 Game.prototype.makeCardAction = function(card) {
@@ -54,10 +54,6 @@ Game.prototype.makeCardAction = function(card) {
       this.life();
       break;
   }
-  // game status
-  //this.checkHandStatus(); // check if needs to flush and draw
-  // update the view
-  // displayStatus();
 };
 
 Game.prototype.fight = function() {
@@ -75,11 +71,22 @@ Game.prototype.fight = function() {
 Game.prototype.hole = function() {
   this.player.hp = 0;
   this.callback("You felt into the hole. You are dead.");
+  console.log("--hole--");
+  
 };
 
 Game.prototype.life = function() {
   this.player.hp = 10;
   this.callback("You ate chicken. Your HP is: " + this.player.hp);
+};
+
+Game.prototype.checkIfCardsNeeded = function() {
+  console.log(" checkIfCardsNeeded - remaining cards: " + this.hand.length);
+  if (this.hand.length < 2) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 Game.prototype.flush = function() {
@@ -88,16 +95,6 @@ Game.prototype.flush = function() {
   this.callback(
     "----------FLUSH------------ \n " + " Disposal Card: " + this.disposal
   );
-};
-
-Game.prototype.checkIfNewCardsAreNeeded = function() {
-  if (this.usedCardsCounter < 2) {
-    console.log("check t: " + this.hand.length);
-    return true;
-  } else {
-    console.log("check f: " + this.hand.length);
-    return false;
-  }
 };
 
 Game.prototype.setTipCallback = function(updateTipText) {
