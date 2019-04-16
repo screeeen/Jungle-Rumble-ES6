@@ -111,11 +111,11 @@ function main() {
     function updateAvatarView() {
       let avatarView = document.querySelector("#avatar");
       let n = "";
-      if (game.player.hp < 7){
+      if (game.player.hp > 7){
         n = "";
-      } else if (game.player.hp < 5){
+      } else if (game.player.hp > 5){
         n = "2";
-      } else if (game.player.hp < 3){
+      } else if (game.player.hp > 3){
         n = "3";
       } else if (game.player.hp < 0) { 
         n = "4";
