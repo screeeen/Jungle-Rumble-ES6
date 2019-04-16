@@ -55,7 +55,7 @@ function main() {
 
     var cardStackForGame = JSON.parse(JSON.stringify(newCardsStack));
     const game = new Game(player, cardStackForGame, newRooms);
-    game.callback = updateTipText;
+    game.callback = tip;
     game.cardStack = game.shuffleCards(game.cardStack);
     game.getHand(game.cardStack);
 
@@ -116,7 +116,7 @@ function main() {
     }
 
     // Generate avatar
-    function updateTipText(msg) {
+    function tip(msg) {
       let tipview = document.querySelector("#tip");
       let result = `<p id="tip-text1">${msg}</p> `;
       tipview.innerHTML = result;
@@ -141,12 +141,14 @@ function main() {
       if (game.checkIfCardsNeeded()) {
         console.log("are needed?: " +game.checkIfCardsNeeded());
 
+
+
         const time = 1000;
-        let timedown = 3;
-        // updateTipText("FLUSHING CARDS in  " + timedown);
+        let timedown = 5;
+        //  tip("FLUSHING CARDS in  " + timedown);
         const intervalId = setInterval(function(){
           timedown--
-          updateTipText("FLUSHING CARDS in  " + timedown);
+          tip("FLUSHING CARDS in  " + timedown);
           if (timedown === 0) {
             flush(intervalId)
           }
@@ -154,9 +156,11 @@ function main() {
       }
     }
 
+    // function waitABit(1000,3,"try this thing in ",function(){flush(this)})
+
+
     function flush(t){
-      console.log();
-      
+      tip("New Round");      
       clearInterval(t);
       game.getHand(game.cardStack);
       updateHandView();
@@ -179,7 +183,7 @@ function main() {
 
     function checkIfGameOver() {
       if (game.player.hp < 1) {
-        updateTipText("Sorry GAME OVER");
+        tip("Sorry GAME OVER");
         setTimeout(buildGameOVerScreen, 1000);
       }
     }
@@ -195,12 +199,12 @@ function main() {
     updateAvatarView();
     nextTurn();
 
-    updateTipText("Welcome");
-    updateTipText(
+    tip("Welcome");
+    tip(
       "cardstack: " + typeof game.cardStack + " " + game.cardsStack
     );
-    updateTipText("hand: " + game.hand);
-    updateTipText("hp: " + game.player.hp);
+    tip("hand: " + game.hand);
+    tip("hp: " + game.player.hp);
   }
 
   // -------------- OVER --------------------
