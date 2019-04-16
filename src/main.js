@@ -140,12 +140,17 @@ function main() {
 
       if (game.checkIfCardsNeeded()) {
         console.log("are needed?: " +game.checkIfCardsNeeded());
-        setTimeout(flush(),100000);
-        updateTipText("FLUSHING CARDS");
+
+       let t = setTimeout(function(){flush(t)},100000);
+
+        updateTipText("FLUSHING CARDS in  " + t);
       }
     }
 
-    function flush(){
+    function flush(t){
+      console.log();
+      
+      clearInterval(t);
       game.getHand(game.cardStack);
       updateHandView();
       updateStack();
