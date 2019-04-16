@@ -143,7 +143,7 @@ function main() {
 
         const time = 1000;
         let timedown = 3;
-        updateTipText("FLUSHING CARDS in  " + timedown);
+        // updateTipText("FLUSHING CARDS in  " + timedown);
         const intervalId = setInterval(function(){
           timedown--
           updateTipText("FLUSHING CARDS in  " + timedown);
@@ -179,7 +179,7 @@ function main() {
 
     function checkIfGameOver() {
       if (game.player.hp < 1) {
-        updateTipText("GAME OVER");
+        updateTipText("Sorry GAME OVER");
         setTimeout(buildGameOVerScreen, 1000);
       }
     }
