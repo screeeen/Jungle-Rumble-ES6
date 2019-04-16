@@ -141,9 +141,16 @@ function main() {
       if (game.checkIfCardsNeeded()) {
         console.log("are needed?: " +game.checkIfCardsNeeded());
 
-       let t = setTimeout(function(){flush(t)},100000);
-
-        updateTipText("FLUSHING CARDS in  " + t);
+        const time = 1000;
+        let timedown = 3;
+        updateTipText("FLUSHING CARDS in  " + timedown);
+        const intervalId = setInterval(function(){
+          timedown--
+          updateTipText("FLUSHING CARDS in  " + timedown);
+          if (timedown === 0) {
+            flush(intervalId)
+          }
+        },time);
       }
     }
 

@@ -5,8 +5,8 @@ html {
 main {
   margin: 20px auto;
   padding: 10px;
-  height: 88vh;
-  width: 68vw;
+  height: 600px;
+  width: 600px;
   background-color: 002fa7;
 }
 
@@ -34,7 +34,7 @@ h2 {
 #game-view {
   border: solid 1px white;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
   height: 70%;
   display: grid;
   grid-template-columns: 3fr 0.5fr;
@@ -154,7 +154,7 @@ font-size: 2em;
   height: 60vh;
   width: 100%;
   /* text-decoration: none; */
-  box-shadow: 10px 10px 860px black;
+  box-shadow: 10px 10px 1px black;
 }
 .start-button,.restart-button:hover {
   background-color: #002fa7;
