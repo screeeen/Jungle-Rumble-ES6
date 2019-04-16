@@ -140,13 +140,17 @@ function main() {
 
       if (game.checkIfCardsNeeded()) {
         console.log("are needed?: " +game.checkIfCardsNeeded());
-
-        game.getHand(game.cardStack);
-        updateHandView();
-        updateStack();
-
-        nextTurn();
+        setTimeout(flush(),100000);
+        updateTipText("FLUSHING CARDS");
       }
+    }
+
+    function flush(){
+      game.getHand(game.cardStack);
+      updateHandView();
+      updateStack();
+
+      nextTurn();
     }
 
     function createHandListeners(handDiv) {
@@ -197,7 +201,7 @@ function main() {
     </section>
     `);
     const restartButton = document.querySelector(".restart-button");
-    restartButton.addEventListener("click", buildSplashScreen);
+    restartButton.addEventListener("click", buildGameScreen);
   }
 
   //TOOL
