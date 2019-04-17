@@ -6,6 +6,7 @@ function Game(player, newCardsStack, newRooms) {
   this.hand = [];
   this.handDivs = [];
   this.usedCards = [];
+  this.adventureStep = 0;
   this.rooms = newRooms;
   this.callback = null;
 }

@@ -72,8 +72,8 @@ function main() {
     }
 
     // Generate rooms and append them to the monitor view
-    function updateRoomsIntoMonitor(card) {
-      console.log("monitor" + card);
+    function updateRoomsIntoMonitor(cardValue) {
+      console.log("monitor" + cardValue);
       let monitorView = document.querySelector("#monitor");
       let result = "";
       game.rooms.forEach(function(ele, index, card) {
@@ -84,8 +84,10 @@ function main() {
         } else {
           game.rooms[index].value = card;
         }
+
+
         result += `
-            <div class="room ${index}" style="background-image: url(img/${
+            <div class="room ${game.adventureStep}" style="background-image: url(img/${
           ele.value
         }_room_open.png)"></div>
 `;
@@ -149,7 +151,8 @@ console.log("Pic " + n);
       checkIfGameOver();
       game.discardCardAfterUse(index);
       console.log(game.hand);
-
+      game.adventureStep++;
+      console.log("step: " + game.adventureStep);
 
       if (game.checkIfCardsNeeded()) {
         console.log("are needed?: " +game.checkIfCardsNeeded());
@@ -202,7 +205,7 @@ console.log("Pic " + n);
     }
 
     function displayCard(index) {
-      game.handDivs[index].style.background = `url(img/${game.hand[index].value}.png) no-repeat`;
+      game.handDivs[index].style.background = `url(img/${game.hand[index].value}.png) center no-repeat`;
     }
 
     //first state
