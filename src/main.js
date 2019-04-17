@@ -73,33 +73,38 @@ function main() {
 
     // Generate rooms and append them to the monitor view
     function updateRoomsIntoMonitor(cardValue) {
-      console.log("monitor cardValue: " + cardValue);
-      let monitorView = document.querySelector("#monitor");
+
+      
       let result = "";
-
-      game.rooms.forEach(function(ele, index, cardValue) {
-        if (game.adventureStep < index){
-          return;
-        }
-        var anim =  "";
-        if (index === 0 || game.rooms[index].visited) {
-          game.rooms[0].value = "start";//start
-          game.rooms[0].visited = true;
-        } else {
-          game.rooms[index].value = cardValue;
-          game.rooms[index].visited = true;
-        } 
-
-        if (!game.rooms[index].visited){
-          anim = "animation: play 0.8s steps(2) 2";
-          
-        }
-
+      let monitorView = document.querySelector("#monitor");
+      
+      game.rooms.forEach(function(ele, index) {
+        
+        // if (game.adventureStep < index){
+        //   return;
+        // }
+        
+        
+        // if (index === 0 || game.rooms[index].visited) {
+          //   game.rooms[0].value = "start";//start
+          //   game.rooms[0].visited = true;
+          // } else {
+            game.rooms[index].value = ele.value;
+            game.rooms[index].visited = true;
+            // } 
+            
+            if (!game.rooms[index].visited){
+              var anim =  "";
+              anim = "animation: play 0.8s steps(2) 2";
+              
+            }
+            
+            console.log("game.adventureStep " + game.adventureStep + " index " + index);
+            console.log("monitor ele value: " + ele.value);
+            
         result += `
-        <div class="room ${game.adventureStep}" style="background-image: url(img/${
-          ele.value
-        }_room_open.png) ${anim}"></div>`;
-        console.log("adventureStep: " + game.adventureStep);   
+        <div class="room ${game.adventureStep}" style="background-image: url(img/${ele.value}_room_open.png) ${anim}"></div>`;
+
       
       });
       monitorView.innerHTML = result;

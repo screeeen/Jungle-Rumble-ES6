@@ -29,8 +29,11 @@ h2 {
   padding: 1% 4%;
   color: white;
   font-size: 0.8em;
-  /* border-bottom: 1px solid white; */
 }
+
+h2{
+  font-size: 1.2em; 
+  }
 
 #title {
   text-align: left;
@@ -78,6 +81,14 @@ h2 {
   overflow: hidden;
   /* position: absolute; */
 }
+
+#stack h2 {
+  margin: 0% 0%;
+  padding: 1% 4%;
+  color: white;
+  font-size: 0.8em;
+  border-bottom: 1px solid white;
+}
 .cards-list {
   display: block;
   list-style-type: disc;
@@ -93,7 +104,7 @@ h2 {
   /* border-bottom: 1px solid white; */
   color: white;
   list-style: none;
-  font-size: 1em;
+  font-size: .7em;
   padding: 0;
   margin: 2px;
 }
@@ -137,6 +148,8 @@ h2 {
 #avatar {
   /* border: solid 1px white; */
 }
+
+
 
 #avatar img {
   /* background-repeat: no-repeat center; */
