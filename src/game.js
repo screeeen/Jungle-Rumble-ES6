@@ -43,7 +43,6 @@ Game.prototype.getHand = function(array) {
 };
 
 Game.prototype.discardCardAfterUse = function(index) {
-  // this.usedCards = this.hand.splice(index, 1);
   this.hand[index].isUsed = true;
 };
 
@@ -87,30 +86,19 @@ Game.prototype.life = function() {
 Game.prototype.checkIfCardsNeeded = function() {
   let counter = this.hand.length;
   this.hand.forEach(function(card) {
-    // console.log("counter check: ");
-    // console.log(card.isUsed === true);
     if (card.isUsed === true) {
       counter--;
-      // console.log("counter: " + counter);
     }
   });
   if (counter < 2) {
-    console.log(counter);
-    console.log("true- flush");
     return true;
   } else {
-    console.log(counter);
-    console.log("false");
     return false;
   }
 };
 
 Game.prototype.flush = function() {
   this.hand = [];
-  // this.callback(
-  //   "----------FLUSH------------ \n " + " Disposal Card: " + this.disposal
-  // );
-  console.log("flush");
 };
 
 Game.prototype.setTipCallback = function(updateTipText) {

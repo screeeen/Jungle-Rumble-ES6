@@ -59,14 +59,17 @@ h2 {
 
 .room {
   border: solid 1px white;
-
-  margin: 0;
+  /* margin: 0;
   padding: 0;
-  /* width: 100%; */
   height: auto;
-
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100%;  */
+  /* animation: play 0.8s steps(2) 2; */
+
+}
+
+@keyframes play {
+  100% { background-position: -252px; }
 }
 
 #stack {

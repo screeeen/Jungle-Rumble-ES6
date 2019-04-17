@@ -73,24 +73,34 @@ function main() {
 
     // Generate rooms and append them to the monitor view
     function updateRoomsIntoMonitor(cardValue) {
-      console.log("monitor" + cardValue);
+      console.log("monitor cardValue: " + cardValue);
       let monitorView = document.querySelector("#monitor");
       let result = "";
-      game.rooms.forEach(function(ele, index, card) {
+
+      game.rooms.forEach(function(ele, index, cardValue) {
+        if (game.adventureStep < index){
+          return;
+        }
+        var anim =  "";
         if (index === 0 || game.rooms[index].visited) {
-          ele.value = "start";
-          game.rooms[0].value = "start";
+          game.rooms[0].value = "start";//start
           game.rooms[0].visited = true;
         } else {
-          game.rooms[index].value = card;
+          game.rooms[index].value = cardValue;
+          game.rooms[index].visited = true;
+        } 
+
+        if (!game.rooms[index].visited){
+          anim = "animation: play 0.8s steps(2) 2";
+          
         }
 
-
         result += `
-            <div class="room ${game.adventureStep}" style="background-image: url(img/${
+        <div class="room ${game.adventureStep}" style="background-image: url(img/${
           ele.value
-        }_room_open.png)"></div>
-`;
+        }_room_open.png) ${anim}"></div>`;
+        console.log("adventureStep: " + game.adventureStep);   
+      
       });
       monitorView.innerHTML = result;
     }
@@ -106,7 +116,6 @@ function main() {
 
       handView.innerHTML = result;
       game.handDivs = document.querySelectorAll(".hand-card");
-      console.log(game.handDivs);
     }
 
     // Generate avatar
@@ -123,7 +132,6 @@ function main() {
         n = "4";
       }
 
-console.log("Pic " + n);
       let result = `<img style="background: url(img/avatar_${n}.png) center no-repeat">
       <h2 class="hp">LIFE: ${game.player.hp}</h2>
      `;
@@ -138,26 +146,21 @@ console.log("Pic " + n);
     }
 
     function selectCard() {
-      console.log(this.attributes.index.value);
       let index = this.attributes.index.value;
-      console.log(index);
       this.removeEventListener('click',selectCard);
       
+
+      game.adventureStep++;
 
       displayCard(index);
       game.makeCardAction(game.hand[index].value);
       updateAvatarView();
+      
       updateRoomsIntoMonitor(game.hand[index].value);
       checkIfGameOver();
       game.discardCardAfterUse(index);
-      console.log(game.hand);
-      game.adventureStep++;
-      console.log("step: " + game.adventureStep);
 
       if (game.checkIfCardsNeeded()) {
-        console.log("are needed?: " +game.checkIfCardsNeeded());
-
-
 
         const time = 1000;
         let timedown = 5;
@@ -210,7 +213,7 @@ console.log("Pic " + n);
 
     //first state
     updateStack();
-    updateRoomsIntoMonitor();
+    updateRoomsIntoMonitor("start");
     updateHandView();
     updateAvatarView();
     nextTurn();
@@ -238,7 +241,6 @@ console.log("Pic " + n);
 
   //TOOL
   document.addEventListener("keydown", function(event) {
-    console.log(event.keyCode);
     if (event.keyCode === 38) {
       buildGameScreen();
     }
