@@ -91,17 +91,22 @@ function main() {
           game.rooms[index].value = cardValue;
           game.rooms[index].visited = true;
           var randomBackground = Math.trunc(Math.random()*4);
+          game.visitedBackgrounds[index] = randomBackground;
+          
+          console.log(game.visitedBackgrounds[index]);
+          
           result += `
-          <div class="room ${game.adventureStep}" style="background-image:url(img/bg_${randomBackground}.png); ">
+          <div class="room ${game.adventureStep}" style="background-image:url(img/bg_${game.visitedBackgrounds[index]}.png); ">
           <img class="room-action" src="img/${game.rooms[index].value}_room_open.png"; style="${anim};"/>
           <h2>${index}</h2>
           </div>`;
           console.log("result string: " + result);
 
           game.visitedRoomsValue[index] = [game.rooms[index].value];
+          game.visitedBackgrounds[index] = randomBackground;
         } else {
           result += `
-        <div class="room ${game.adventureStep}" style="background-image:url(img/bg_scene.png); ${anim}" ><h2>${index}</h2></div>`;
+        <div class="room ${game.adventureStep}" style="background-image:url(img/bg_${game.visitedBackgrounds[index]}.png); ${anim}" ><h2>${index}</h2></div>`;
         }
 
             console.log("game.adventureStep " + game.adventureStep + " index " + index);

@@ -55,3 +55,22 @@ var newRooms = [
   {value: "closed", visited: false},
   {value: "closed", visited: false}
 ]
+
+// var visitedBackgrounds = [
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0,
+//   0
+// ]
