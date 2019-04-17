@@ -8,6 +8,7 @@ function Game(player, newCardsStack, newRooms) {
   this.usedCards = [];
   this.adventureStep = 0;
   this.rooms = newRooms;
+  this.visitedRoomsValue =[];
   this.callback = null;
 }
 

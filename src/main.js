@@ -79,33 +79,34 @@ function main() {
       let monitorView = document.querySelector("#monitor");
       
       game.rooms.forEach(function(ele, index) {
-        
-        // if (game.adventureStep < index){
-        //   return;
-        // }
-        
-        
-        // if (index === 0 || game.rooms[index].visited) {
-          //   game.rooms[0].value = "start";//start
-          //   game.rooms[0].visited = true;
-          // } else {
-            game.rooms[index].value = ele.value;
-            game.rooms[index].visited = true;
-            // } 
-            
-            if (!game.rooms[index].visited){
-              var anim =  "";
-              anim = "animation: play 0.8s steps(2) 2";
-              
-            }
-            
-            console.log("game.adventureStep " + game.adventureStep + " index " + index);
-            console.log("monitor ele value: " + ele.value);
-            
-        result += `
-        <div class="room ${game.adventureStep}" style="background-image: url(img/${ele.value}_room_open.png) ${anim}"></div>`;
 
-      
+        if (game.adventureStep < index){
+          return;
+        }
+
+        var anim =  "";
+        console.log("room: visited: " + game.rooms[index].visited + " value: " +game.rooms[index].value);
+
+
+        if (!game.rooms[index].visited){
+          anim ='animation: play 0.8s steps(2) 2'; 
+          game.rooms[index].value = cardValue;
+          game.rooms[index].visited = true;
+          result += `
+          <div class="room ${game.adventureStep}" style="background-image:url(img/${cardValue}_room_open.png); ${anim}" ><h2>${index}</h2></div>`;
+          console.log("result string: " + result);
+
+          game.visitedRoomsValue[index] = [game.rooms[index].value];
+        } else {
+          result += `
+        <div class="room ${game.adventureStep}" style="background-image:url(img/${game.visitedRoomsValue[index]}_room_open.png); ${anim}" ><h2>${index}</h2></div>`;
+        }
+
+            console.log("game.adventureStep " + game.adventureStep + " index " + index);
+            console.log("monitor ele value: " + ele.value + " " +cardValue);
+            console.log("anim: " + anim);
+            console.log("--------------------");
+
       });
       monitorView.innerHTML = result;
     }

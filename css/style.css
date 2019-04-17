@@ -61,12 +61,12 @@ h2{
 }
 
 .room {
-  border: solid 1px white;
+  border: solid 1px grey;
   /* margin: 0;
   padding: 0;
   height: auto;
-  background-repeat: no-repeat;
-  background-size: 100%;  */
+  background-repeat: no-repeat;*/
+  /* background-size: 100%;  */
   /* animation: play 0.8s steps(2) 2; */
 
 }
