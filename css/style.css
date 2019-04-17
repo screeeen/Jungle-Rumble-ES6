@@ -57,11 +57,11 @@ h2{
   grid-template-columns: 4fr 4fr 4fr 4fr;
   grid-template-rows: 4fr 4fr 4fr;
   background-color: 002fa7;
-  /* border: solid 1px white; */
+  border: solid 1px white;
 }
 
 .room {
-  border: solid 1px grey;
+  border: solid 1px white;
   /* margin: 0;
   padding: 0;
   height: auto;
@@ -130,19 +130,31 @@ h2{
   margin: auto;
   background-repeat: no-repeat center;
   background-size: 1%;
+
+  transform-style: preserve-3d;
+
+
 }
 
 .hand-card:hover {
   border: solid 4px white;
+  transition: transform .2s;
+  transform: scale(1.1);
+
+}
+
+.hand-card:active {
+  background-repeat: no-repeat center;
+  background-size: 100%;
+  transition: transform .1s;
+
+  transform: rotateY(180deg);
+
 }
 
 .hand-card concealed {
   border: solid 1px white;
-}
 
-.card-back {
-  background-repeat: no-repeat center;
-  background-size: 1%;
 }
 
 #avatar {

@@ -38,8 +38,6 @@ Game.prototype.getHand = function(array) {
       this.hand.push(cardToPass);
     }
   }
-  console.log("flushed  New Hand:");
-  console.log(this.hand);
 
 };
 

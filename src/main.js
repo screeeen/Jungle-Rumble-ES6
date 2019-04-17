@@ -144,7 +144,6 @@ function main() {
       avatarView.innerHTML = result;
     }
 
-    // Generate avatar
     function tip(msg) {
       let tipview = document.querySelector("#tip");
       let result = `<p id="tip-text1">${msg}</p> `;
@@ -214,6 +213,8 @@ function main() {
     }
 
     function displayCard(index) {
+      console.log(game.handDivs[index]);
+      // class="card-front" 
       game.handDivs[index].style.background = `url(img/${game.hand[index].value}.png) center no-repeat`;
     }
 
