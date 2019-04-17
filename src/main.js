@@ -74,7 +74,6 @@ function main() {
     // Generate rooms and append them to the monitor view
     function updateRoomsIntoMonitor(cardValue) {
 
-      
       let result = "";
       let monitorView = document.querySelector("#monitor");
       
@@ -87,19 +86,22 @@ function main() {
         var anim =  "";
         console.log("room: visited: " + game.rooms[index].visited + " value: " +game.rooms[index].value);
 
-
         if (!game.rooms[index].visited){
           anim ='animation: play 0.8s steps(2) 2'; 
           game.rooms[index].value = cardValue;
           game.rooms[index].visited = true;
+          var randomBackground = Math.trunc(Math.random()*4);
           result += `
-          <div class="room ${game.adventureStep}" style="background-image:url(img/${cardValue}_room_open.png); ${anim}" ><h2>${index}</h2></div>`;
+          <div class="room ${game.adventureStep}" style="background-image:url(img/bg_${randomBackground}.png); ">
+          <img class="room-action" src="img/${game.rooms[index].value}_room_open.png"; style="${anim};"/>
+          <h2>${index}</h2>
+          </div>`;
           console.log("result string: " + result);
 
           game.visitedRoomsValue[index] = [game.rooms[index].value];
         } else {
           result += `
-        <div class="room ${game.adventureStep}" style="background-image:url(img/${game.visitedRoomsValue[index]}_room_open.png); ${anim}" ><h2>${index}</h2></div>`;
+        <div class="room ${game.adventureStep}" style="background-image:url(img/bg_scene.png); ${anim}" ><h2>${index}</h2></div>`;
         }
 
             console.log("game.adventureStep " + game.adventureStep + " index " + index);
