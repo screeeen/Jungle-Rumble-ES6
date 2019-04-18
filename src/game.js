@@ -21,7 +21,7 @@ Game.prototype.shuffleCards = function(array) {
 
     result.push(randomCard[0]);
   }
-  this.setTipCallback("game-shuffle: " + result);
+  // this.setTipCallback("game-shuffle: " + result);
 
   return result;
 };
@@ -67,7 +67,7 @@ Game.prototype.fight = function() {
   this.callback(
     "The fight has broke your jaw in pieces and damage is: " +
       damage +
-      "\n Now your HP is: " +
+      "<br> Now your HP is: " +
       this.player.hp
   );
 };
@@ -75,7 +75,6 @@ Game.prototype.fight = function() {
 Game.prototype.hole = function() {
   this.player.hp = 0;
   this.callback("You felt into the hole. You are dead.");
-  console.log("--hole--");
 };
 
 Game.prototype.life = function() {

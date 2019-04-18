@@ -86,12 +86,6 @@ function main() {
         }
 
         var anim = "";
-        console.log(
-          "room: visited: " +
-            game.rooms[index].visited +
-            " value: " +
-            game.rooms[index].value
-        );
 
         if (!game.rooms[index].visited) {
           anim = "animation: play 0.8s steps(2) 2";
@@ -99,8 +93,6 @@ function main() {
           game.rooms[index].visited = true;
           var randomBackground = Math.trunc(Math.random() * 4);
           game.visitedBackgrounds[index] = randomBackground;
-
-          console.log(game.visitedBackgrounds[index]);
 
           result += `
           <div class="room ${
@@ -113,7 +105,7 @@ function main() {
           }_room_open.png"; style="${anim};"/>
           <h2>${index}</h2>
           </div>`;
-          console.log("result string: " + result);
+          // console.log("result string: " + result);
 
           game.visitedRoomsValue[index] = [game.rooms[index].value];
           game.visitedBackgrounds[index] = randomBackground;
@@ -126,12 +118,12 @@ function main() {
           }.png); ${anim}" ><h2>${index}</h2></div>`;
         }
 
-        console.log(
-          "game.adventureStep " + game.adventureStep + " index " + index
-        );
-        console.log("monitor ele value: " + ele.value + " " + cardValue);
-        console.log("anim: " + anim);
-        console.log("--------------------");
+        // console.log(
+        //   "game.adventureStep " + game.adventureStep + " index " + index
+        // );
+        // console.log("monitor ele value: " + ele.value + " " + cardValue);
+        // console.log("anim: " + anim);
+        // console.log("--------------------");
       });
       monitorView.innerHTML = result;
     }
@@ -164,56 +156,52 @@ function main() {
       let n = "";
       if (game.player.hp > 7) {
         n = "";
-      } 
-       if (game.player.hp < 5) {
+      }
+      if (game.player.hp < 5) {
         n = "2";
-      } 
-       if (game.player.hp < 3) {
+      }
+      if (game.player.hp < 3) {
         n = "3";
-      } 
-       if (game.player.hp < 1) {
+      }
+      if (game.player.hp < 1) {
         n = "4";
       }
 
       let result = "";
-      if (game.player.hp > 0){
-
-       result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"> <h2 class="hp">LIFE: ${game.player.hp}</h2>`;
-    } else {
-       result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"><h2 class="hp">DEAD</h2>`;
-     }
+      if (game.player.hp > 0) {
+        result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"> <h2 class="hp">LIFE: ${
+          game.player.hp
+        }</h2>`;
+      } else {
+        result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"><h2 class="hp">DEAD</h2>`;
+      }
       avatarView.innerHTML = result;
     }
 
-    function tip(msg) {
-      let tipview = document.querySelector("#tip");
-      let txt = msg;
-      document.querySelector("#tip").innerHTML = "";
-      
-      function typeWriter() {
-        let i = 0;
-      if (i < txt.length) {
-        document.querySelector("#tip").innerHTML += txt.charAt(i);
-        let result = `<p id="tip-text1">${txt}</p> `;
-        tipview.innerHTML = result;
-        i++;
-        setTimeout(typeWriter, 50);
-      }
-    }
-    }
+  
 
-    function typeWriter() {
-      if (i < msg.length) {
-        document.getElementById("demo").innerHTML += txt.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
+    function tip(msg) {
+      var speed = 25;
+      var i = 0;
+      let tipview = document.querySelector("#tip");
+      let txt = "";
+
+      function type() {
+        if (i < msg.length) {
+          txt += msg.charAt(i);
+          let result = `<p id="tip-text1">${txt}</p> `;
+          tipview.innerHTML = result;
+          i++;
+          setTimeout(type, speed);
+        }
       }
+      type();
     }
 
     function selectCard() {
       let index = this.attributes.index.value;
       this.removeEventListener("onmouseenter", selectCard);
-      this.setAttribute("id","hand-card-back");
+      this.setAttribute("id", "hand-card-back");
       displayCard(index);
 
       game.adventureStep++;
@@ -274,40 +262,35 @@ function main() {
     }
 
     function displayCard(index) {
-      console.log(game.handDivs[index]);
+      // console.log(game.handDivs[index]);
       game.handDivs[index].style.background = `url(img/${
         game.hand[index].value
       }.png) center no-repeat`;
     }
 
     function closeCardBox() {
-      
       game.handDivs.forEach(function(e) {
         var cardsBox = document.querySelectorAll(".hand-card");
-        console.log("FFF" + cardsBox);
 
-        cardsBox.forEach(function(e,i){
-          e.removeAttribute("class","hand-card");
-          e.removeAttribute("id","hand-card-back");
+        cardsBox.forEach(function(e, i) {
+          e.removeAttribute("class", "hand-card");
+          e.removeAttribute("id", "hand-card-back");
 
           e.style.background = ""; // removeAttribute("class","background");
-          e.setAttribute("class","hand-closed");
-
+          e.setAttribute("class", "hand-closed");
         });
-      //   // game.handDivs[e].value = `<p>coming...</p>`;
-      //   // e.removeEventListener("click", selectCard);
-
+        //   // game.handDivs[e].value = `<p>coming...</p>`;
+        //   // e.removeEventListener("click", selectCard);
       });
     }
 
-    function openCardBox(){
+    function openCardBox() {
       var thing = document.querySelectorAll(".hand-closed");
 
-      thing.forEach(function(e,i){
-        console.log(e);
-        e.removeAttribute("class","hand-closed");
-        e.setAttribute("class","hand-card");
-        e.setAttribute("class","hand-open");
+      thing.forEach(function(e, i) {
+        e.removeAttribute("class", "hand-closed");
+        e.setAttribute("class", "hand-card");
+        e.setAttribute("class", "hand-open");
       });
     }
 
@@ -320,7 +303,6 @@ function main() {
 
     tip("Welcome");
     tip("cardstack: " + typeof game.cardStack + " " + game.cardsStack);
-    tip("hand: " + game.hand);
     tip(
       "Welcome to jungle Rumble. Pick a card and enjoy. Your hp: " +
         game.player.hp
@@ -348,3 +330,32 @@ function main() {
   });
 }
 window.addEventListener("load", main);
+
+
+
+
+
+// function tip(msg) {
+//   let txt = [];
+//   let tipview = document.querySelector("#tip");
+//   let speed = 8000;
+
+//   console.log("msg: " +msg);
+
+//   function typeIt(letter){
+//     // [...txt + letter].forEach((letter)=>{
+//       txt.push(letter);
+//       let txtButJoined = txt.join('')
+
+//       console.log("text " + txtButJoined);
+
+//       let result = `<p id="tip-text1">${txtButJoined}</p> `;
+//       tipview.innerHTML = result;
+
+//       console.log(txt);
+//       // setTimeout(typeIt, speed);
+//       // i++;
+//     }
+//     [...msg].forEach((letter)=> setTimeout(()=>{typeIt(letter)},speed))
+//     // typeIt();
+//   }
