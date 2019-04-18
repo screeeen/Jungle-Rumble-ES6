@@ -30,8 +30,8 @@ var newCardsStack = [
   { value: "fight", isUsed: false },
   { value: "fight", isUsed: false },
   { value: "fight", isUsed: false },
-  { value: "fight", isUsed: false },
-  { value: "fight", isUsed: false },
+  { value: "hole", isUsed: false },
+  { value: "hole", isUsed: false },
   { value: "life", isUsed: false },
   { value: "life", isUsed: false },
   { value: "life", isUsed: false }

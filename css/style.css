@@ -128,8 +128,23 @@ h2 {
   grid-gap: 10px;
   background-color: #002fa7;
   height: auto;
-  /* border: solid 1px black; */
-  /* border: solid 1px black; */
+  border: solid 1px white;
+  grid-template-columns: 4fr 4fr 4fr 4fr;
+  grid-template-rows: 1fr;
+  grid-gap: 10px;
+
+}
+
+.hand-opened{
+  transition: transform .5s; 
+  border: solid 1px white;
+  transform: scaleY(1);
+}
+
+.hand-closed{
+  transition: transform .5s;
+  /* border: solid 1px white; */
+  transform: scaleY(0);
 }
 
 .hand-card {
@@ -142,8 +157,7 @@ h2 {
   margin: auto;
   background-repeat: no-repeat center;
   background-size: 1%;
-
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
 }
 
 .hand-card:hover {
@@ -152,16 +166,25 @@ h2 {
   transform: scale(1.1);
 }
 
-.hand-card:active {
+/* .hand-card:active {
   background-repeat: no-repeat center;
   background-size: 100%;
-  transition: transform 0.1s;
-
+  transition: transform 0.05s;
   transform: rotateY(180deg);
-}
+} */
+
+ #hand-card-back {
+  border: solid 1px white;
+  background-repeat: no-repeat center;
+  background-size: 100%;
+  transition: transform .3s;
+  transform: rotateY(180deg);
+} 
 
 .hand-card concealed {
-  border: solid 1px white;
+  /* border: solid 1px white; */
+  transition: transform 0.5s;
+  transform: scaleY(0);
 }
 
 #avatar {
