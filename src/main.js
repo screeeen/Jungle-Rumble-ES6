@@ -50,15 +50,14 @@ function main() {
 
       </div>
     </div>
-
-
 `);
 
     const hp = 10;
     var player = new Player(hp);
-
     var cardStackForGame = JSON.parse(JSON.stringify(newCardsStack));
-    const game = new Game(player, cardStackForGame, newRooms);
+    var newRoomsCopy = JSON.parse(JSON.stringify(newRooms));
+    
+    const game = new Game(player, cardStackForGame, newRoomsCopy);
     game.callback = tip;
     game.cardStack = game.shuffleCards(game.cardStack);
     game.getHand(game.cardStack);
@@ -79,43 +78,39 @@ function main() {
     function updateRoomsIntoMonitor(cardValue) {
       let result = "";
       let monitorView = document.querySelector("#monitor");
-
+      
+      
       game.rooms.forEach(function(ele, index) {
         if (game.adventureStep < index) {
           return;
         }
-
+        
         var anim = "";
-
+        console.log ("game.rooms",game.rooms);
+        
         if (!game.rooms[index].visited) {
+          
           anim = "animation: play 0.8s steps(2) 2";
           game.rooms[index].value = cardValue;
           game.rooms[index].visited = true;
           var randomBackground = Math.trunc(Math.random() * 4);
+          
+          
           game.visitedBackgrounds[index] = randomBackground;
 
+
+
+
           result += `
-          <div class="room ${
-            game.adventureStep
-          }" style="background-image:url(img/bg_${
-            game.visitedBackgrounds[index]
-          }.png); ">
-          <img class="room-action" src="img/${
-            game.rooms[index].value
-          }_room_open.png"; style="${anim};"/>
-          <h2>${index}</h2>
-          </div>`;
+          <div class="room ${game.adventureStep}" style="background-image:url(img/bg_${game.visitedBackgrounds[index]}.png); ">
+          <img class="room-action" src="img/${game.rooms[index].value}_room_open.png"; style="${anim};"/><h2>${index}</h2></div>`;
           // console.log("result string: " + result);
 
           game.visitedRoomsValue[index] = [game.rooms[index].value];
           game.visitedBackgrounds[index] = randomBackground;
+
         } else {
-          result += `
-        <div class="room ${
-          game.adventureStep
-        }" style="background-image:url(img/bg_${
-            game.visitedBackgrounds[index]
-          }.png); ${anim}" ><h2>${index}</h2></div>`;
+          result += `<div class="room ${game.adventureStep}" style="background-image:url(img/bg_${game.visitedBackgrounds[index]}.png); ${anim}" ><h2>${index}</h2></div>`;
         }
 
         // console.log(
@@ -140,15 +135,6 @@ function main() {
       handView.innerHTML = result;
       game.handDivs = document.querySelectorAll(".hand-card");
     }
-
-    // function createHandText(){
-    //   let handView = document.querySelector("#hand");
-    //   let result = "";
-    //     result += `
-    //         <div class="hand"><h1>PREPARING CARDS</h1></div>`;
-
-    //   handView.innerHTML = result;
-    // }
 
     // Generate avatar
     function updateAvatarView() {
@@ -177,8 +163,6 @@ function main() {
       }
       avatarView.innerHTML = result;
     }
-
-  
 
     function tip(msg) {
       var speed = 25;
@@ -229,8 +213,6 @@ function main() {
       }
     }
 
-    // function waitABit(1000,3,"try this thing in ",function(){flush(this)})
-
     function flush(t) {
       openCardBox();
       tip("New Round");
@@ -250,19 +232,18 @@ function main() {
     }
 
     function nextTurn() {
-      // let handCards = document.querySelectorAll(".hand-card");
       createHandListeners(game.handDivs);
     }
 
     function checkIfGameOver() {
       if (game.player.hp < 1) {
         tip("Sorry GAME OVER");
+        closeCardBox();
         setTimeout(buildGameOVerScreen, 5000);
       }
     }
 
     function displayCard(index) {
-      // console.log(game.handDivs[index]);
       game.handDivs[index].style.background = `url(img/${
         game.hand[index].value
       }.png) center no-repeat`;
@@ -275,12 +256,10 @@ function main() {
         cardsBox.forEach(function(e, i) {
           e.removeAttribute("class", "hand-card");
           e.removeAttribute("id", "hand-card-back");
-
           e.style.background = ""; // removeAttribute("class","background");
           e.setAttribute("class", "hand-closed");
         });
-        //   // game.handDivs[e].value = `<p>coming...</p>`;
-        //   // e.removeEventListener("click", selectCard);
+
       });
     }
 
