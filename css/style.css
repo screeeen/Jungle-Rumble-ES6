@@ -57,6 +57,9 @@ h2 {
   grid-template-rows: 4fr 4fr 4fr;
   background-color: 002fa7;
   border: solid 1px white;
+  background-repeat: no-repeat;
+  background-size: 100%; 
+  background-image: url("../img/monitor_bg.png");
 }
 
 .room {
