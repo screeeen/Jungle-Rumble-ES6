@@ -32,21 +32,22 @@ function main() {
       <h1>Jungle Rumble Cards Adventure </h1>
     </div>
     <div id="game-view">
+    <div id="stack">
+    <h2>Cards Stack</h2>
+    <ul class="cards-list"></ul>
+  </div>
       <div id="monitor"></div>
-      <div id="stack">
-        <h2>Cards Stack</h2>
-        <ul class="cards-list"></ul>
+      <div id="avatar">
+        <!-- <h2 class=".hp"></h2> -->
       </div>
       <div id="hand">
       <div class="hand-opened">
         <h2>Your Cards</h2>
         </div>
       </div>
-      <div id="avatar">
-        <!-- <h2 class=".hp"></h2> -->
-      </div>
+      <div class="life-ui"></div>
       <div id="tip">
-        <p>Here are the tips: <span id="tip-text"></span></p>
+        <p>---TIPS HERE---- <span id="tip-text"></span></p>
 
       </div>
     </div>
@@ -139,6 +140,7 @@ function main() {
     // Generate avatar
     function updateAvatarView() {
       let avatarView = document.querySelector("#avatar");
+      let lifeUI = document.querySelector(".life-ui");
       let n = "";
       if (game.player.hp > 7) {
         n = "";
@@ -154,14 +156,18 @@ function main() {
       }
 
       let result = "";
+      let resultLifeStats = "";
       if (game.player.hp > 0) {
-        result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"> <h2 class="hp">LIFE: ${
-          game.player.hp
-        }</h2>`;
+        result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"> `;
+      resultLifeStats = `<h2 class="life-ui">LIFE: ${
+        game.player.hp
+      } </h2>`;
       } else {
-        result = `<img style="background: url(img/avatar_${n}.png) center no-repeat"><h2 class="hp">DEAD</h2>`;
+        result = `<img style="background: url(img/avatar_${n}.png) center no-repeat">`;
+      resultLifeStats = `<h2 class="life-ui">+DEAD+</h2>`;
       }
       avatarView.innerHTML = result;
+      lifeUI.innerHTML = resultLifeStats;
     }
 
     function tip(msg) {
@@ -202,10 +208,9 @@ function main() {
 
         const time = 1000;
         let timedown = 5;
-        //  tip("FLUSHING CARDS in  " + timedown);
         const intervalId = setInterval(function() {
           timedown--;
-          tip("FLUSHING CARDS in  " + timedown);
+          tip("New cards in  " + timedown);
           if (timedown === 0) {
             flush(intervalId);
           }
@@ -215,7 +220,7 @@ function main() {
 
     function flush(t) {
       openCardBox();
-      tip("New Round");
+      tip("New Round. Pick a card young fellow.");
       clearInterval(t);
       game.getHand(game.cardStack);
       updateHandView();
@@ -280,10 +285,8 @@ function main() {
     updateAvatarView();
     nextTurn();
 
-    tip("Welcome");
-    tip("cardstack: " + typeof game.cardStack + " " + game.cardsStack);
     tip(
-      "Welcome to jungle Rumble. Pick a card and enjoy. Your hp: " +
+      "Welcome to <color:#F44>jungle Rumble</color>. Pick a card and enjoy. Your hp: " +
         game.player.hp
     );
   }

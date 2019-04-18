@@ -21,7 +21,6 @@ Game.prototype.shuffleCards = function(array) {
 
     result.push(randomCard[0]);
   }
-  // this.setTipCallback("game-shuffle: " + result);
 
   return result;
 };
