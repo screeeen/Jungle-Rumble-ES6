@@ -34,7 +34,6 @@ var newCardsStack = [
   { value: "hole", isUsed: false },
   { value: "life", isUsed: false },
   { value: "life", isUsed: false },
-  { value: "life", isUsed: false }
 ];
 
 var newRooms = [
@@ -53,7 +52,6 @@ var newRooms = [
   {value: "closed", visited: false},
   {value: "closed", visited: false},
   {value: "closed", visited: false},
-  {value: "closed", visited: false}
 ];
 
 // var visitedBackgrounds = [

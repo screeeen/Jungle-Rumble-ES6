@@ -87,7 +87,6 @@ function main() {
         }
         
         var anim = "";
-        console.log ("game.rooms",game.rooms);
         
         if (!game.rooms[index].visited) {
           

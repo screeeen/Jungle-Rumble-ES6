@@ -64,9 +64,9 @@ Game.prototype.fight = function() {
   this.player.hp -= damage;
 
   this.callback(
-    "The fight has broke your jaw in pieces and damage is: " +
-      damage +
-      "<br> Now your HP is: " +
+    "The fight has broke your jaw in pieces for: " +
+      damage + " hp points." +
+      "<br> Now your health is: " +
       this.player.hp
   );
 };
