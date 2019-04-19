@@ -55,6 +55,26 @@ function main() {
 
     const hp = 10;
     var player = new Player(hp);
+    var tick = new Audio("snd/tick.wav");
+    var flipCard = new Audio("snd/flipCard.wav");
+    var music  = new Audio ("snd/tune.mp3");
+    var lifeSnd  = new Audio ("snd/life.wav");
+    var fightSnd = new Audio ("snd/fight.wav");
+    var deadSnd = new Audio ("snd/dead.wav");
+
+    music.volume = .2;
+    music.loop = true;
+    music.play();
+
+
+    // function changeSound (sound){
+    //   audioGuy.pause();
+    //   audioGuy.currentTime = 0;
+    //   audioGuy.pitch = Math.random();
+    //   audioGuy.src = `snd/${sound}.wav`;
+    //   audioGuy.play();
+    // }
+
     var cardStackForGame = JSON.parse(JSON.stringify(newCardsStack));
     var newRoomsCopy = JSON.parse(JSON.stringify(newRooms));
     
@@ -178,6 +198,9 @@ function main() {
       function type() {
         if (i < msg.length) {
           txt += msg.charAt(i);
+          tick.pitch = -5//Math.random();
+          tick.volume = .1;
+          tick.play();
           let result = `<p id="tip-text1">${txt}</p> `;
           tipview.innerHTML = result;
           i++;
@@ -241,6 +264,8 @@ function main() {
 
     function checkIfGameOver() {
       if (game.player.hp < 1) {
+        music.pause();
+        deadSnd.play();
         tip("Sorry GAME OVER");
         closeCardBox();
         setTimeout(buildGameOVerScreen, 5000);
@@ -248,6 +273,9 @@ function main() {
     }
 
     function displayCard(index) {
+      flipCard.pitch = -5//Math.random();
+      flipCard.volume = .8;
+      flipCard.play();
       game.handDivs[index].style.background = `url(img/${
         game.hand[index].value
       }.png) center no-repeat`;

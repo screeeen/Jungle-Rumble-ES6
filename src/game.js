@@ -48,6 +48,7 @@ Game.prototype.discardCardAfterUse = function(index) {
 Game.prototype.makeCardAction = function(card) {
   switch (card) {
     case "fight":
+    // lifeSnd
       this.fight();
       break;
     case "hole":
