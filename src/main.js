@@ -167,6 +167,12 @@ function main() {
       if (game.player.hp == 8) {
         n = "6";
       }
+      if (game.player.hp == 4) {
+        n = "6";
+      }
+      if (game.player.hp == 2) {
+        n = "6";
+      }
 
       if (game.player.hp < 5) {
         n = "2";
