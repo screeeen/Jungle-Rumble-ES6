@@ -324,7 +324,23 @@ function main() {
     const gameOverScreen = buildDom(`
     <section>
     <h1>Game Over</h1>
-    <button class="restart-button">Restart</button>
+    <button class="restart-button">
+    <p id="leaflet">
+    Haiku:
+    <br>
+    · Choose a magic card<br>
+    · Watch the history chart<br>
+    · Be lucky<br>
+    · Repeat
+     <br>
+     <br>
+     <br>
+     ...and now click and restart.
+     <br>
+    </p>
+    </button>
+   
+
     </section>
     `);
     const restartButton = document.querySelector(".restart-button");

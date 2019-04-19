@@ -35,7 +35,7 @@ h2 {
 
 #title {
   text-align: left;
-  background-color: 002fa7;
+  background-color: #002fa7;
   height: 10%;
 }
 
@@ -256,6 +256,21 @@ h2 {
   top: 1px;
   font-family: "B612", sans-serif;
   text-shadow: 1px 1px 1px black;
+}
+
+.cta{
+  height: 10%;
+}
+
+#leaflet{
+  /* border: solid 1px white; */
+  width: 50%;
+  margin: 3%;
+  padding: 3%;
+  text-align: left;
+  font-size: .5em;
+  color: #dae2f7;
+  margin: 0 auto;
 }
 
 /* .wipe {

@@ -11,6 +11,7 @@ function Game(player, newCardsStack, newRooms) {
   this.visitedRoomsValue =[];
   this.visitedBackgrounds =[];
   this.callback = null;
+  this.audioCallBack = null;
 }
 
 Game.prototype.shuffleCards = function(array) {
@@ -65,9 +66,9 @@ Game.prototype.fight = function() {
   this.player.hp -= damage;
 
   this.callback(
-    "The fight has broke your jaw in pieces for: " +
-      damage + " hp points." +
-      "<br> Now your health is: " +
+    "What a fight!! The damage is: " +
+      damage +
+      " Now your life points are: " +
       this.player.hp
   );
 };
