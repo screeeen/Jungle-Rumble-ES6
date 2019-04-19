@@ -164,6 +164,10 @@ function main() {
       if (game.player.hp > 7) {
         n = "";
       }
+      if (game.player.hp == 8) {
+        n = "6";
+      }
+
       if (game.player.hp < 5) {
         n = "2";
       }
@@ -353,10 +357,9 @@ function main() {
       buildGameScreen();
     }
   });
+
 }
-window.addEventListener("load", main);
-
-
+  window.addEventListener("load", main);
 
 
 
@@ -384,3 +387,4 @@ window.addEventListener("load", main);
 //     [...msg].forEach((letter)=> setTimeout(()=>{typeIt(letter)},speed))
 //     // typeIt();
 //   }
+
