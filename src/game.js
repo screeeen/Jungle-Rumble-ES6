@@ -1,6 +1,7 @@
 "use strict";
 
-function Game(player, newCardsStack, newRooms) {
+class Game {
+  constructor (player, newCardsStack, newRooms){
   this.player = player;
   this.cardStack = newCardsStack;
   this.hand = [];
@@ -14,7 +15,7 @@ function Game(player, newCardsStack, newRooms) {
   this.audioCallBack = null;
 }
 
-Game.prototype.shuffleCards = function(array) {
+shuffleCards(array) {
   let result = []; //wtf, gives undefined
   for (; array.length > 0; ) {
     let randomNumber = Math.floor(Math.random() * array.length);
@@ -24,13 +25,13 @@ Game.prototype.shuffleCards = function(array) {
   }
 
   return result;
-};
+}
 
-Game.prototype.initializeRooms = function() {
+initializeRooms() {
   return this.cardStack.length;
 };
 
-Game.prototype.getHand = function(array) {
+getHand (array) {
   this.hand = [];
   if (array.length > 0) {
     for (var i = 0; i < 4; i++) {
@@ -42,11 +43,11 @@ Game.prototype.getHand = function(array) {
 
 };
 
-Game.prototype.discardCardAfterUse = function(index) {
+discardCardAfterUse(index) {
   this.hand[index].isUsed = true;
 };
 
-Game.prototype.makeCardAction = function(card) {
+makeCardAction (card) {
   switch (card) {
     case "fight":
     // lifeSnd
@@ -60,8 +61,7 @@ Game.prototype.makeCardAction = function(card) {
       break;
   }
 };
-
-Game.prototype.fight = function() {
+fight () {
   let damage = parseInt(1 + Math.random() * 4);
   this.player.hp -= damage;
 
@@ -73,22 +73,24 @@ Game.prototype.fight = function() {
   );
 };
 
-Game.prototype.hole = function() {
-  this.player.hp = 0;
+hole () {
+this.player.hp = 0;
   this.callback("You felt into the hole. You are dead.");
 };
 
-Game.prototype.life = function() {
+life  () {
   this.player.hp = 10;
   this.callback("You ate chicken. Your HP is: " + this.player.hp);
 };
 
-Game.prototype.checkIfCardsNeeded = function() {
+checkIfCardsNeeded () {
   let counter = this.hand.length;
-  this.hand.forEach(function(card) {
+  this.hand.forEach((card) => {
+
     if (card.isUsed === true) {
       counter--;
     }
+
   });
   if (counter < 2) {
     return true;
@@ -97,11 +99,12 @@ Game.prototype.checkIfCardsNeeded = function() {
   }
 };
 
-Game.prototype.flush = function() {
+flush  () {
   this.hand = [];
 };
 
-Game.prototype.setTipCallback = function(updateTipText) {
+setTipCallback  (updateTipText) {
   this.updateTipText = updateTipText;
   this.callback(this.updateTipText);
 };
+}

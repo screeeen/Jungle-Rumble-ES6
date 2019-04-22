@@ -1,6 +1,6 @@
 "use strict";
 
-var cardsStack = [
+let cardsStack = [
   "fight",
   "fight",
   "fight",
@@ -18,7 +18,7 @@ var cardsStack = [
   "hole",
   "hole"
 ];
-var newCardsStack = [
+let newCardsStack = [
   { value: "fight", isUsed: false },
   { value: "fight", isUsed: false },
   { value: "fight", isUsed: false },
@@ -36,7 +36,7 @@ var newCardsStack = [
   { value: "life", isUsed: false },
 ];
 
-var newRooms = [
+let newRooms = [
   {value: "closed", visited: false},
   {value: "closed", visited: false},
   {value: "closed", visited: false},
