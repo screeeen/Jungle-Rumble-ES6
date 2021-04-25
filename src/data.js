@@ -16,7 +16,7 @@ let cardsStack = [
   "life",
   "life",
   "hole",
-  "hole"
+  "fight",
 ];
 let newCardsStack = [
   { value: "fight", isUsed: false },
@@ -37,21 +37,21 @@ let newCardsStack = [
 ];
 
 let newRooms = [
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
-  {value: "closed", visited: false},
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
+  { value: "closed", visited: false },
 ];
 
 // var visitedBackgrounds = [
